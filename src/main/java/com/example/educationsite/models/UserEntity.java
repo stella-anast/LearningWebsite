@@ -18,15 +18,15 @@ public class UserEntity {
     private String username;
 
     @Column(nullable = false)
-    private String password;
+    private String password; //hash
 
-    @Column
+    @Column(nullable = false)
     private String firstName;
 
-    @Column
+    @Column(nullable = false)
     private String lastName;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
