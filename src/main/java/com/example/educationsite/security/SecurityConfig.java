@@ -36,13 +36,13 @@ public class SecurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/signup", "/login", "/public/**").permitAll()
+                            .requestMatchers("/api/signup", "/api/login", "/api/test/").permitAll()
                             .requestMatchers(HttpMethod.GET).permitAll()
                             .anyRequest().authenticated()
                     )
                     .formLogin(formLogin ->
                             formLogin
-                                    .loginPage("/login")
+                                    .loginPage("/api/login")
                                     .permitAll()
                     )
                     .httpBasic(withDefaults())

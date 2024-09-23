@@ -1,7 +1,7 @@
 package com.example.educationsite;
 
 public enum SkillLevel {
-    BEGGINER,
-    INTERMIDIATE,
+    BEGINNER,
+    INTERMEDIATE,
     PRO
 }
