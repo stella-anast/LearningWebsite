@@ -43,6 +43,8 @@ public class SecurityConfig {
                     .formLogin(formLogin ->
                             formLogin
                                     .loginPage("/api/login")
+                                    .defaultSuccessUrl("/api/success", true)
+                                    .failureUrl("/api/login?error=true")
                                     .permitAll()
                     )
                     .httpBasic(withDefaults())

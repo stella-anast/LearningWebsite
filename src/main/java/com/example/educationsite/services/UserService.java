@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     @Autowired
@@ -13,14 +15,22 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public boolean registerUser(UserEntity user) {
-        // Check if the email or username already exists before saving
+        // Check user exists-email and username
         if (userRepository.existsByEmail(user.getEmail()) || userRepository.existsByUsername(user.getUsername())) {
-            return false; // User already exists
+            return false;
         }
 
-        // If no conflict, save the new user
+        //save user
         user.setPassword(passwordEncoder.encode(user.getPassword())); // Ensure password is encoded
         userRepository.save(user);
         return true;
     }
+    public Optional<UserEntity> validateUser(String username, String password) {
+        Optional<UserEntity> userOpt = userRepository.findByUsername(username);
+        if (userOpt.isPresent() && passwordEncoder.matches(password, userOpt.get().getPassword())) {
+            return userOpt;
+        }
+        return Optional.empty();
+    }
+
 }

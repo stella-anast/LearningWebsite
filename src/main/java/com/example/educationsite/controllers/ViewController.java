@@ -21,12 +21,6 @@ public class ViewController {
         return "signup";
     }
 
-
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
-
     @PostMapping("/signup")
     public String signUp(@ModelAttribute UserEntity user, Model model) {
         if (!userService.registerUser(user)) {
