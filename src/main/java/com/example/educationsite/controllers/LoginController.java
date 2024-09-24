@@ -27,10 +27,6 @@ public class LoginController {
             return "login";
         }
 
-    @GetMapping("/success")
-    public String successPage() {
-        return "success";
-    }
     /*
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {

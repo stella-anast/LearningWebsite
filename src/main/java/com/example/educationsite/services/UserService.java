@@ -32,5 +32,10 @@ public class UserService {
         }
         return Optional.empty();
     }
+    public UserEntity findByUsername(String username) {
+        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+        return userOptional.orElse(null);
+    }
+
 
 }

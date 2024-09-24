@@ -1,37 +1,40 @@
 package com.example.educationsite.controllers;
 
-import com.example.educationsite.SkillLevel;
 import com.example.educationsite.models.UserEntity;
 import com.example.educationsite.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/{username}")
 public class ViewController {
     @Autowired
     private UserService userService;
-
-    @GetMapping("/signup")
-    public String showSignupPage(Model model) {
-        model.addAttribute("user", new UserEntity());
-        return "signup";
+    @GetMapping("/material")
+    public String showMaterial(@PathVariable String username, Model model) {
+        model.addAttribute("username", username);
+        return "material";
+    }
+    @GetMapping("/lecture1")
+    public String showLecture(@PathVariable String username, Model model) {
+        model.addAttribute("username", username);
+        return "lecture1";
+    }
+    @GetMapping("/home")
+    public String showHomePage(@PathVariable String username, Model model) {
+        UserEntity user = userService.findByUsername(username);
+        model.addAttribute("user", user);
+        return "mainPage";
+    }
+    @GetMapping("/dashboard")
+    public String showDashboard(@PathVariable String username, Model model) {
+        UserEntity user = userService.findByUsername(username);
+        model.addAttribute("user", user);
+        return "dashboard";
     }
 
-    @PostMapping("/signup")
-    public String signUp(@ModelAttribute UserEntity user, Model model) {
-        if (!userService.registerUser(user)) {
-            model.addAttribute("errorMessage", "User with this email or username already exists.");
-            model.addAttribute("user", user);
-            return "signup";
-        } else {
-
-            model.addAttribute("successMessage", "User registered successfully!");
-            return "redirect:/api/login"; // Redirect to login or wherever you want
-        }
-
-    }
 }
