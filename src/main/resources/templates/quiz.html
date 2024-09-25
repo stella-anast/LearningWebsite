@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quizzes</title>
+    <link rel="icon" type="image/x-icon" href="/python-logo.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color: #B0C4DE">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav items">
+            <li class="nav-item active">
+                <a class="nav-link" style="font-size:25px; color: #555;" th:href="@{/api/{username}/home(username=${username})}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:25px; color: #555;" th:href="@{/api/{username}/material(username=${username})}">Material</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:25px; color: #555;" th:href="@{/api/{username}/quiz(username=${username})}">Quiz</a>
+            </li>
+        </ul>
+
+    </div>
+    <a th:href="@{/api/{username}/dashboard(username=${username})}" class="btn btn-outline-primary my-2 my-sm-0 d-flex align-items-center">
+        <img src="/account.png" alt="Profile Photo" class="rounded-circle" width="30" height="30">
+    </a>
+</nav>
+</body>
+</html>

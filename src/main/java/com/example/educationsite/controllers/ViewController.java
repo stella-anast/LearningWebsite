@@ -30,6 +30,12 @@ public class ViewController {
         model.addAttribute("user", user);
         return "mainPage";
     }
+    @GetMapping("/quiz")
+    public String showQuiz(@PathVariable String username, Model model) {
+        UserEntity user = userService.findByUsername(username);
+        model.addAttribute("user", user);
+        return "quiz";
+    }
     @GetMapping("/dashboard")
     public String showDashboard(@PathVariable String username, Model model) {
         UserEntity user = userService.findByUsername(username);
