@@ -8,15 +8,24 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body style="background-color: #B0C4DE">
-<div class="container mt-5">
-    <img src="/python.png" alt="Python Image">
-  <h1>Welcome to the Python Learning Platform</h1>
-    <br><br><br><br>
-  <p style="font-size:25px;">
-    The goal of this site is to learn Python and test your knowledge through quizzes.
-    Your learning journey will be personalized according to your weaknesses and strengths.
-  </p>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <br><br><br>
+        <img src="/python.png" alt="Python Image" style="width:300px;height:300px;">
+        <br><br>
+        <h1>Welcome to the Python Learning Platform</h1>
+        <br><br>
+        <p style="font-size:25px;width:900px;" >
+            The goal of this site is to learn Python and test your knowledge through quizzes. Your learning journey will
+            be personalized according to your weaknesses and strengths.
+        </p>
+    </div>
 
+</div>
+<br>
+<div class="d-flex justify-content-center align-items-center">
+    <a th:href="@{/api/signup}" class="btn btn-primary btn-lg mx-2">Sign Up</a>
+    <a th:href="@{/api/login}" class="btn btn-secondary btn-lg mx-2">Login</a>
 </div>
 </body>
 </html>
