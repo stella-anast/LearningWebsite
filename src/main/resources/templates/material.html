@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="Layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,49 +7,70 @@
   <link rel="icon" type="image/x-icon" href="/python-logo.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
-<body style="background-color: #B0C4DE">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav items">
-      <li class="nav-item active">
-        <a class="nav-link" style="font-size:25px; color: #555;" th:href="@{/api/{username}/home(username=${username})}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="font-size:25px; color: #555;" th:href="@{/api/{username}/material(username=${username})}">Material</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="font-size:25px; color: #555;" th:href="@{/api/{username}/quiz(username=${username})}">Quiz</a>
-      </li>
-    </ul>
-
+<body style="background-color: #B0C4DE" layout:fragment="content">
+  <br>
+  <div class="container-fluid mt-4">
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Introduction to Python
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4">
+                <div class="list-group" id="list-tab" role="tablist">
+                  <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Introduction</a>
+                  <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Python Basics</a>
+                  <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Solved Exercises</a>
+                  <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Links and files</a>
+                </div>
+              </div>
+              <div class="col-8">
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">Welcome to Python</div>
+                  <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Here you will find material</div>
+                  <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Exercise 1.</div>
+                  <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list"><p>See presentation here:</p><a class="nav-link" style="color:#2d93da" href="/pythonBeginner.pdf" target="_blank">Introduction to Python</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Enhancing Your Python Skills
+            </button>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card-body"><a class="nav-link" style="color:black" href="/pythonIntermediate.pdf" target="_blank">Enhancing Your Python Skills</a></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingThree">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Advanced Python Programming: Mastering the Language
+            </button>
+          </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div class="card-body"><a class="nav-link" style="color:black" href="/pythonExpert.pdf" target="_blank">Advanced Python Programming: Mastering the Language</a></div>
+        </div>
+      </div>
+    </div>
   </div>
-  <a th:href="@{/api/{username}/dashboard(username=${username})}" class="btn btn-outline-primary my-2 my-sm-0 d-flex align-items-center">
-    <img src="/account.png" alt="Profile Photo" class="rounded-circle" width="30" height="30">
-  </a>
-</nav>
 
-<div class="container mt-4">
-  <table>
-    <tr>
-      <td style="font-size: 30px;">
-        <a class="nav-link" style="color:black" href="/pythonBeginner.pdf" target="_blank">Introduction to Python</a>
-      </td>
-    </tr>
-    <tr>
-      <td style="font-size: 30px;">
-        <a class="nav-link" style="color:black" href="/pythonIntermediate.pdf" target="_blank">Enhancing Your Python Skills</a>
-      </td>
-    </tr>
-    <tr>
-      <td style="font-size: 30px;">
-        <a class="nav-link" style="color:black" href="/pythonExpert.pdf" target="_blank">Advanced Python Programming: Mastering the Language</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -6,30 +6,37 @@
     <link rel="icon" type="image/x-icon" href="/python-logo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
-<body style="background-color: #B0C4DE">
-<div class="row justify-content-center align-items-center" style="margin-top:25px;">
-<div>
-    <h2>Login</h2><br>
-    <div th:if="${errorMessage}" class="alert alert-danger" style="width:300px;">
-        <img src="/error.png" alt="Error" width="20" height="20">
-        <span th:text="${errorMessage}"></span>
-    </div>
-    <form th:action="@{/api/login}" method="post" th:object="${user}">
-        <div class="form-group">
-            <label for="username" style="font-size:20px;">Username:</label>
-            <input th:field="*{username}" type="text" id="username" name="username" class="form-control" style="width: 300px;" required>
+<body style="background-color: #B0C4DE;">
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-4">
+            <div class="card" style="border-radius: 20px">
+                <div class="card-body">
+                    <h2 class="text-center">Login</h2><br>
+                    <div th:if="${errorMessage}" class="alert alert-danger" style="width:100%;">
+                        <img src="/error.png" alt="Error" width="20" height="20">
+                        <span th:text="${errorMessage}"></span>
+                    </div>
+                    <form th:action="@{/api/login}" method="post" th:object="${user}">
+                        <div class="form-group">
+                            <label for="username" style="font-size:20px;">Username:</label>
+                            <input th:field="*{username}" type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" style="font-size:20px;">Password:</label>
+                            <input th:field="*{password}" type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button><br><br>
+                    </form>
+                    <div>
+                        <p class="text-center">Don't have an account? <a th:href="@{/api/signup}">Register here.</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password" style="font-size:20px;">Password:</label>
-            <input th:field="*{password}" type="password" id="password" name="password" class="form-control" style="width: 300px;" required>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Login</button><br><br>
-    </form>
-    <div>
-        <p class="form-footer">Don't have an account? <a th:href="@{/api/signup}">Register here.</a></p>
     </div>
-</div>
 </div>
 </body>
 </html>
+
