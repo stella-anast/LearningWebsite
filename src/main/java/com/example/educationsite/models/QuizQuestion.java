@@ -3,6 +3,7 @@ package com.example.educationsite.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -15,6 +16,14 @@ public class QuizQuestion {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String question;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private QuestionType questionType;
+
+
+    @OneToMany(mappedBy = "quizQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<QuestionOptions> options;
 
     @Column(nullable = false)
     private String correctAnswer;
