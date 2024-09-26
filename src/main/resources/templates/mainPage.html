@@ -12,8 +12,14 @@
 </head>
 <body style="background-color: #B0C4DE" layout:fragment="content">
 
-<div class="container mt-4">
-    <h2>Welcome back, <span th:text="${user.firstName}"></span>!</h2>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome back, <span th:text="${user.firstName}"></span>!</h1>
+    <p class="lead">We're excited to help advance your knowledge in Programming with Python.</p>
+    <hr class="my-4">
+    <p>You are currently at <span th:text="${user.skillLevel}"></span> level. Advance by reading the material and passing the corresponding quizzes!</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" th:href="@{/api/{username}/material(username=${username})}" role="button">Start Learning</a>
+    </p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
