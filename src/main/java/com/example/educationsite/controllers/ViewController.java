@@ -29,6 +29,17 @@ public class ViewController {
     private QuizService quizService;
     @Autowired
     private UserAnswerService answerService;
+
+
+    @GetMapping("/statistics/{userId}/{quizId}")
+    public String getStatistics(@PathVariable String username,@PathVariable Long userId, @PathVariable Long quizId) {
+        int correctCount = answerService.getCorrectAnswersCount(userId, quizId);
+        int totalCount = answerService.getTotalAnswersCount(userId, quizId);
+        double percentage = (double) correctCount / totalCount * 100;
+
+        return String.format("User ID: %d, Quiz ID: %d, Correct Answers: %d, Total Answers: %d, Percentage: %.2f%%",
+                userId, quizId, correctCount, totalCount, percentage);
+    }
     @GetMapping("/material")
     public String showMaterial(@PathVariable String username, Model model) {
         model.addAttribute("username", username);
