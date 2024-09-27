@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html layout:decorate="Layouts/defaultLayout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Statistics</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #B0C4DE; /* Light Steel Blue */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: #B0C4DE" layout:fragment="content">
+
+<div class="container">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2>Quiz Statistics</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Total Questions</th>
+                    <th>Correct Answers</th>
+                    <th>Incorrect Answers</th>
+                    <th>Score (%)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="quizStatsRow">
+                    <!-- Assuming these values are set by your server-side controller -->
+                    <td th:text="${totalQuestions}">Total Questions</td>
+                    <td th:text="${correctAnswers}">Correct Answers</td>
+                    <td th:text="${incorrectAnswers}">Incorrect Answers</td>
+                    <td th:text="${scorePercentage}">Score (%)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-center">
+            <a href="/refresh" class="btn btn-primary">Refresh Statistics</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -66,6 +66,14 @@ public class UserAnswerService {
                 .map(userAnswer -> userAnswer.getQuizQuestion().getId())  // Extract the ID from each UserAnswer
                 .collect(Collectors.toList());
     }
+    public int getCorrectAnswersCount(Long userId, Long quizId) {
+        List<UserAnswer> userAnswers = userAnswerRepository.findByUserEntityIdAndQuizId(userId, quizId);
+        return (int) userAnswers.stream().filter(UserAnswer::isCorrect).count();
+    }
+
+    public int getTotalAnswersCount(Long userId, Long quizId) {
+        return userAnswerRepository.findByUserEntityIdAndQuizId(userId, quizId).size();
+    }
 
     public List<Long> getIncorrectQuestionIds(UserEntity user, Long quizId) {
         // Query repository to get all UserAnswer where isCorrect is false for the given user and quiz

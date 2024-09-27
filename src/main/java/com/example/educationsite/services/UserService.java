@@ -32,6 +32,10 @@ public class UserService {
         }
         return Optional.empty();
     }
+    public Long findUserIdByUsername(String username) {
+        Optional<UserEntity> userOpt = userRepository.findByUsername(username);
+        return userOpt.map(UserEntity::getId).orElse(null); // Return user ID or null if not found
+    }
     public UserEntity findByUsername(String username) {
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
         return userOptional.orElse(null);
