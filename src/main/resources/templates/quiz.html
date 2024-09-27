@@ -139,10 +139,12 @@
             .then(data => {
                 // Handle success
                 document.getElementById("closeModal").click();
-                document.getElementById("result-container").style.display = 'block';
-                document.getElementById("result").innerHTML = `<h3>${data.message}</h3>`;
+                window.location.href = data.redirectUrl;
             })
             .catch(error => {
+                document.getElementById("closeModal").click();
+                document.getElementById("result-container").style.display = 'block';
+                document.getElementById("result").innerHTML = `<h3>${error}</h3>`;
                 console.error('Error:', error);
             });
     }

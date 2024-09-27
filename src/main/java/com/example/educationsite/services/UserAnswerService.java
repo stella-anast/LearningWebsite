@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserAnswerService {
@@ -56,6 +57,14 @@ public class UserAnswerService {
     // Method to find existing UserAnswer by user and question
     public UserAnswer findByUserAndQuestion(UserEntity user, QuizQuestion question) {
         return userAnswerRepository.findByUserEntityAndQuizQuestion(user, question).orElse(null);
+    }
+
+    public List<Long> getIncorrectQuestionIds(UserEntity user) {
+        // Query repository to get all UserAnswer where isCorrect is false for the given user
+        return userAnswerRepository.findByUserEntityAndIsCorrectFalse(user)
+                .stream()
+                .map(userAnswer -> userAnswer.getQuizQuestion().getId())  // Extract the ID from each UserAnswer
+                .collect(Collectors.toList());
     }
 
 }

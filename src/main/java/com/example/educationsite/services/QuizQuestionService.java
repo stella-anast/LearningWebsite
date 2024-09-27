@@ -28,6 +28,11 @@ public class QuizQuestionService {
     }
 
     @Transactional
+    public List<QuizQuestion> findQuestionsByIds(List<Long> questionIds) {
+        return quizQuestionRepository.findAllById(questionIds);
+    }
+
+    @Transactional
     public void addQuizQuestions(Long quizId) {
         Quiz quiz = quizRepository.findById(quizId)
                 .orElseThrow(() -> new RuntimeException("Quiz not found"));
