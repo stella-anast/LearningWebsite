@@ -1,5 +1,7 @@
 package com.example.educationsite.controllers;
 
+import com.example.educationsite.services.QuizService;
+import com.example.educationsite.models.Quiz;
 import com.example.educationsite.models.QuizQuestion;
 import com.example.educationsite.models.UserEntity;
 import com.example.educationsite.services.QuizQuestionService;
@@ -20,6 +22,8 @@ public class ViewController {
     private UserService userService;
     @Autowired
     private QuizQuestionService quizQuestionService;
+    @Autowired
+    private QuizService quizService;
     @GetMapping("/material")
     public String showMaterial(@PathVariable String username, Model model) {
         model.addAttribute("username", username);
@@ -36,13 +40,26 @@ public class ViewController {
         model.addAttribute("user", user);
         return "mainPage";
     }
-    @GetMapping("/quiz")
-    public String showQuiz(@PathVariable String username, Model model) {
+   @GetMapping("/quizzes/quiz/{id}") // Endpoint to get quiz by ID
+    public String showQuiz(@PathVariable String username, @PathVariable Long id, Model model) {
         UserEntity user = userService.findByUsername(username);
-        List<QuizQuestion> questions = quizQuestionService.findByQuizId(1L);
+
+        List<QuizQuestion> questions = quizQuestionService.findByQuizId(id);
+        model.addAttribute("username", username);
         model.addAttribute("questions", questions);
         model.addAttribute("user", user);
+        model.addAttribute("id", id);
+
         return "quiz";
+    }
+    @GetMapping("/quizzes")
+    public String showQuizzes(@PathVariable String username, Model model) {
+        UserEntity user = userService.findByUsername(username);
+        List<Quiz> quizzes = quizService.findAll();
+        model.addAttribute("username", username);
+        model.addAttribute("quizzes", quizzes);
+        model.addAttribute("user", user);
+        return "quizzes";
     }
     @GetMapping("/dashboard")
     public String showDashboard(@PathVariable String username, Model model) {

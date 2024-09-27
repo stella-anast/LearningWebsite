@@ -35,12 +35,11 @@
 <div class="container quiz-container">
     <div class="card">
         <div class="card-header text-center">
-            <h1>Quiz</h1>
+            <h1>Quiz ID: <span th:text="${quizId}"></span></h1>
         </div>
 
         <div class="card-body">
             <hr>
-
             <form id="quizForm">
                 <!-- Dynamic Pages with 3 questions each -->
                 <div th:each="page, pageStat : ${#numbers.sequence(0, questions.size() / 3)}">
@@ -49,9 +48,9 @@
                             <!-- Only show 3 questions per page -->
                             <div th:if="${stat.index >= pageStat.index * 3 and stat.index < (pageStat.index + 1) * 3}">
                                 <h4 th:text="${stat.index + 1} + '. ' + ${question.question}"></h4>
-                                <div class="form-check" th:each="option, optStat : ${question.options}">
-                                    <input class="form-check-input" type="radio" th:name="'q' + ${stat.index + 1}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${optStat.index}">
-                                    <label class="form-check-label" th:for="'q' + ${stat.index + 1} + 'a' + ${optStat.index}" th:text="${option.optionText}"></label>
+                                <div class="form-check" th:each="option : ${question.options}">
+                                    <input class="form-check-input" type="radio" th:name="'q' + ${stat.index + 1}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${option.id}">
+                                    <label class="form-check-label" th:for="'q' + ${stat.index + 1} + 'a' + ${option.id}" th:text="${option.optionText}"></label>
                                 </div>
                             </div>
                         </div>
@@ -102,6 +101,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    const quizId = [[${quizId}]]; // Dynamic quiz ID
+    const username = [[${user.username}]]; // Dynamic username
+
     // Function to go to the next page
     function nextPage(pageNumber) {
         document.querySelectorAll('.quiz-page').forEach(page => page.style.display = 'none');
@@ -114,22 +116,36 @@
         document.getElementById('page' + pageNumber).style.display = 'block';
     }
 
-    // Function to submit the quiz - Εδω πρεπει να καλείται ο controller που θα παίρνει τα inputs και θα τσεκαρει τις λύσεις
+    // Function to submit the quiz
     function submitQuiz() {
-        let score = 0;
+        const userAnswers = [];
 
-        // Check answers - deprecated
-        if (document.querySelector('input[name="q1"]:checked')?.value === 'Athens') score++;
-        if (document.querySelector('input[name="q2"]:checked')?.value === 'Zeus') score++;
-        if (document.querySelector('input[name="q3"]:checked')?.value === 'Peloponnesian War') score++;
-        if (document.querySelector('input[name="q4"]:checked')?.value === 'True') score++;
+        // Gather user answers
+        document.querySelectorAll('input[type="radio"]:checked').forEach((input) => {
+            const questionId = input.name; // Use question ID from the name attribute
+            const selectedAnswer = input.value;
+            userAnswers.push({ questionId: questionId, answer: selectedAnswer });
+        });
 
-        // Display result - deprecated
-        document.getElementById("closeModal").click();
-        document.getElementById("result-container").style.display = 'block';
-        document.getElementById("result").innerHTML = `<h3>Your score is: ${score}/3</h3>`;
+        // Sending user answers to the server
+        fetch(`/api/quiz/${username}/submit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quizId: quizId, answers: userAnswers })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success
+                document.getElementById("closeModal").click();
+                document.getElementById("result-container").style.display = 'block';
+                document.getElementById("result").innerHTML = `<h3>${data.message}</h3>`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 </script>
 </body>
-
 </html>
