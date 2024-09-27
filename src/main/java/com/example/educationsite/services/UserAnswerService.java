@@ -1,41 +1,28 @@
 package com.example.educationsite.services;
 
-import com.example.educationsite.repositories.QuizRepository;
+import com.example.educationsite.models.QuizQuestion;
+import com.example.educationsite.models.UserAnswer;
+import com.example.educationsite.models.UserEntity;
+import com.example.educationsite.repositories.UserAnswerRepository;
+import com.example.educationsite.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserAnswerService {
-    /*
 
     @Autowired
     private UserAnswerRepository userAnswerRepository;
 
-    @Autowired
-    private QuizRepository quizRepository;
-
-    @Autowired
-    private QuizQuestionRepository quizQuestionRepository;
-
-    public void saveUserAnswers(Long quizId, List<QuizController.QuizSubmission.Answer> answers) {
-        // Assuming you have a method to fetch the current user
-        UserEntity currentUser = // fetch the current user
-
-        for (QuizController.QuizSubmission.Answer answer : answers) {
-            UserAnswer userAnswer = new UserAnswer();
-            userAnswer.setUserEntity(currentUser);
-            userAnswer.setQuiz(quizRepository.findById(quizId).orElse(null));
-
-            // Fetch the question using the ID provided in the answer
-            QuizQuestion question = quizQuestionRepository.findById(Long.parseLong(answer.getQuestionId())).orElse(null);
-            userAnswer.setQuizQuestion(question);
-
-            // Check if the provided answer matches the correct answer
-            boolean isCorrect = question != null && question.getCorrectAnswer().equals(answer.getAnswer());
-            userAnswer.setCorrect(isCorrect);
-
+    public void saveUserAnswers(UserAnswer answer) {
             // Save the user's answer to the repository
-            userAnswerRepository.save(userAnswer);
-        }
+            userAnswerRepository.save(answer);
     }
-     */
+
+    // Method to find existing UserAnswer by user and question
+    public UserAnswer findByUserAndQuestion(UserEntity user, QuizQuestion question) {
+        return userAnswerRepository.findByUserEntityAndQuizQuestion(user, question).orElse(null);
+    }
+
 }

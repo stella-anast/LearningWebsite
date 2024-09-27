@@ -35,7 +35,7 @@
 <div class="container quiz-container">
     <div class="card">
         <div class="card-header text-center">
-            <h1>Quiz ID: <span th:text="${quizId}"></span></h1>
+            <h1>Quiz <span th:text="${quizId}"></span></h1>
         </div>
 
         <div class="card-body">
@@ -49,7 +49,7 @@
                             <div th:if="${stat.index >= pageStat.index * 3 and stat.index < (pageStat.index + 1) * 3}">
                                 <h4 th:text="${stat.index + 1} + '. ' + ${question.question}"></h4>
                                 <div class="form-check" th:each="option : ${question.options}">
-                                    <input class="form-check-input" type="radio" th:name="'q' + ${stat.index + 1}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${option.id}">
+                                    <input class="form-check-input" type="radio" th:name="${stat.index + 1}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${option.id}">
                                     <label class="form-check-label" th:for="'q' + ${stat.index + 1} + 'a' + ${option.id}" th:text="${option.optionText}"></label>
                                 </div>
                             </div>
@@ -122,13 +122,13 @@
 
         // Gather user answers
         document.querySelectorAll('input[type="radio"]:checked').forEach((input) => {
-            const questionId = input.name; // Use question ID from the name attribute
+            const questionId = parseInt(input.name, 10); // Use question ID from the name attribute
             const selectedAnswer = input.value;
             userAnswers.push({ questionId: questionId, answer: selectedAnswer });
         });
         console.log(userAnswers)
         // Sending user answers to the server
-        fetch(`/api/quiz/${username}/submit`, {
+        fetch(`/api/${username}/quiz/submit`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
