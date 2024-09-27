@@ -1,7 +1,6 @@
 package com.example.educationsite.controllers;
 
 import com.example.educationsite.dto.QuizSubmissionDTO;
-import com.example.educationsite.models.UserAnswer;
 import com.example.educationsite.services.QuizService;
 import com.example.educationsite.models.Quiz;
 import com.example.educationsite.models.QuizQuestion;
@@ -65,42 +64,9 @@ public class ViewController {
         List<QuizSubmissionDTO.AnswerDTO> answers = submission.getAnswers();
         List<QuizQuestion> questions = quizQuestionService.findByQuizId(quizId);
         UserEntity user = userService.findByUsername(username);
-
-        // Print quizId
-        System.out.println("Quiz ID: " + quizId);
         // Iterate through the questions
         for (QuizQuestion question : questions) {
-            Long questionId = question.getId();
-            String correctAnswer = question.getCorrectAnswer();
-
-            // Find the corresponding answer from the answers list
-            QuizSubmissionDTO.AnswerDTO submittedAnswer = answers.stream()
-                    .filter(answer -> answer.getQuestionId()==(questionId))
-                    .findFirst()
-                    .orElse(null);
-
-            UserAnswer userAnswer = answerService.findByUserAndQuestion(user, question);
-            if(userAnswer==null){ // first time answering
-                userAnswer = new UserAnswer();
-            }
-            userAnswer.setUserEntity(user);
-            userAnswer.setQuiz(question.getQuiz());
-            userAnswer.setQuizQuestion(question);
-
-            if (submittedAnswer != null) {
-                String providedAnswer = submittedAnswer.getAnswer();
-                boolean isCorrect = correctAnswer.equals(providedAnswer);
-                userAnswer.setCorrect(isCorrect);
-                // Print true if the answer is correct, false otherwise
-                System.out.println("Question ID: " + questionId);
-                System.out.println("Answer: " + providedAnswer);
-                System.out.println("Correct: " + isCorrect);
-            } else {
-                // If no answer was provided for this question, set isCorrect to false
-                userAnswer.setCorrect(false);
-                System.out.println("No answer provided for question ID: " + questionId);
-            }
-            answerService.saveUserAnswers(userAnswer);  // Assume there's a service to handle saving UserAnswer
+            answerService.saveUserAnswers(user,answers, question);  // Assume there's a service to handle saving UserAnswer
         }
 
         return ResponseEntity.status(HttpStatus.OK).body("Quiz submitted successfully.");
