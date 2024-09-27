@@ -42,25 +42,21 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q1 = new QuestionOptions();
         option1Q1.setOptionText("Guido van Rossum, 1991");
-        option1Q1.setCorrect(true);
         option1Q1.setQuizQuestion(question1);
         questionOptionsRepository.save(option1Q1);
 
         QuestionOptions option2Q1 = new QuestionOptions();
         option2Q1.setOptionText("James Gosling, 1995");
-        option2Q1.setCorrect(false);
         option2Q1.setQuizQuestion(question1);
         questionOptionsRepository.save(option2Q1);
 
         QuestionOptions option3Q1 = new QuestionOptions();
         option3Q1.setOptionText("Brendan Eich, 1997");
-        option3Q1.setCorrect(false);
         option3Q1.setQuizQuestion(question1);
         questionOptionsRepository.save(option3Q1);
 
         QuestionOptions option4Q1 = new QuestionOptions();
         option4Q1.setOptionText("Dennis Ritchie, 1972");
-        option4Q1.setCorrect(false);
         option4Q1.setQuizQuestion(question1);
         questionOptionsRepository.save(option4Q1);
 
@@ -74,13 +70,11 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q2 = new QuestionOptions();
         option1Q2.setOptionText("True");
-        option1Q2.setCorrect(false);
         option1Q2.setQuizQuestion(question2);
         questionOptionsRepository.save(option1Q2);
 
         QuestionOptions option2Q2 = new QuestionOptions();
         option2Q2.setOptionText("False");
-        option2Q2.setCorrect(true);
         option2Q2.setQuizQuestion(question2);
         questionOptionsRepository.save(option2Q2);
 
@@ -94,13 +88,11 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q3 = new QuestionOptions();
         option1Q3.setOptionText("True");
-        option1Q3.setCorrect(true);
         option1Q3.setQuizQuestion(question3);
         questionOptionsRepository.save(option1Q3);
 
         QuestionOptions option2Q3 = new QuestionOptions();
         option2Q3.setOptionText("False");
-        option2Q3.setCorrect(false);
         option2Q3.setQuizQuestion(question3);
         questionOptionsRepository.save(option2Q3);
 
@@ -114,13 +106,11 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q4 = new QuestionOptions();
         option1Q4.setOptionText("True");
-        option1Q4.setCorrect(false);
         option1Q4.setQuizQuestion(question4);
         questionOptionsRepository.save(option1Q4);
 
         QuestionOptions option2Q4 = new QuestionOptions();
         option2Q4.setOptionText("False");
-        option2Q4.setCorrect(true);
         option2Q4.setQuizQuestion(question4);
         questionOptionsRepository.save(option2Q4);
 
@@ -134,13 +124,11 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q5 = new QuestionOptions();
         option1Q5.setOptionText("True");
-        option1Q5.setCorrect(true);
         option1Q5.setQuizQuestion(question5);
         questionOptionsRepository.save(option1Q5);
 
         QuestionOptions option2Q5 = new QuestionOptions();
         option2Q5.setOptionText("False");
-        option2Q5.setCorrect(false);
         option2Q5.setQuizQuestion(question5);
         questionOptionsRepository.save(option2Q5);
 
@@ -154,25 +142,21 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q6 = new QuestionOptions();
         option1Q6.setOptionText("Procedural");
-        option1Q6.setCorrect(false);
         option1Q6.setQuizQuestion(question6);
         questionOptionsRepository.save(option1Q6);
 
         QuestionOptions option2Q6 = new QuestionOptions();
         option2Q6.setOptionText("Object-oriented");
-        option2Q6.setCorrect(false);
         option2Q6.setQuizQuestion(question6);
         questionOptionsRepository.save(option2Q6);
 
         QuestionOptions option3Q6 = new QuestionOptions();
         option3Q6.setOptionText("Functional");
-        option3Q6.setCorrect(false);
         option3Q6.setQuizQuestion(question6);
         questionOptionsRepository.save(option3Q6);
 
         QuestionOptions option4Q6 = new QuestionOptions();
         option4Q6.setOptionText("All of the above");
-        option4Q6.setCorrect(true);
         option4Q6.setQuizQuestion(question6);
         questionOptionsRepository.save(option4Q6);
 
@@ -186,13 +170,11 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q7 = new QuestionOptions();
         option1Q7.setOptionText("True");
-        option1Q7.setCorrect(true);
         option1Q7.setQuizQuestion(question7);
         questionOptionsRepository.save(option1Q7);
 
         QuestionOptions option2Q7 = new QuestionOptions();
         option2Q7.setOptionText("False");
-        option2Q7.setCorrect(false);
         option2Q7.setQuizQuestion(question7);
         questionOptionsRepository.save(option2Q7);
 
@@ -206,25 +188,21 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q8 = new QuestionOptions();
         option1Q8.setOptionText("Curly braces {}");
-        option1Q8.setCorrect(false);
         option1Q8.setQuizQuestion(question8);
         questionOptionsRepository.save(option1Q8);
 
         QuestionOptions option2Q8 = new QuestionOptions();
         option2Q8.setOptionText("Square brackets []");
-        option2Q8.setCorrect(false);
         option2Q8.setQuizQuestion(question8);
         questionOptionsRepository.save(option2Q8);
 
         QuestionOptions option3Q8 = new QuestionOptions();
         option3Q8.setOptionText("Indentation");
-        option3Q8.setCorrect(true);
         option3Q8.setQuizQuestion(question8);
         questionOptionsRepository.save(option3Q8);
 
         QuestionOptions option4Q8 = new QuestionOptions();
         option4Q8.setOptionText("Parentheses ()");
-        option4Q8.setCorrect(false);
         option4Q8.setQuizQuestion(question8);
         questionOptionsRepository.save(option4Q8);
 
@@ -238,25 +216,21 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q9 = new QuestionOptions();
         option1Q9.setOptionText("Add an element to the end of a list");
-        option1Q9.setCorrect(true);
         option1Q9.setQuizQuestion(question9);
         questionOptionsRepository.save(option1Q9);
 
         QuestionOptions option2Q9 = new QuestionOptions();
         option2Q9.setOptionText("Remove an element from a list");
-        option2Q9.setCorrect(false);
         option2Q9.setQuizQuestion(question9);
         questionOptionsRepository.save(option2Q9);
 
         QuestionOptions option3Q9 = new QuestionOptions();
         option3Q9.setOptionText("Add an element at the beginning of a list");
-        option3Q9.setCorrect(false);
         option3Q9.setQuizQuestion(question9);
         questionOptionsRepository.save(option3Q9);
 
         QuestionOptions option4Q9 = new QuestionOptions();
         option4Q9.setOptionText("Replace an element in a list");
-        option4Q9.setCorrect(false);
         option4Q9.setQuizQuestion(question9);
         questionOptionsRepository.save(option4Q9);
 
@@ -270,25 +244,21 @@ public class QuizQuestionService {
 
         QuestionOptions option1Q10 = new QuestionOptions();
         option1Q10.setOptionText("List");
-        option1Q10.setCorrect(false);
         option1Q10.setQuizQuestion(question10);
         questionOptionsRepository.save(option1Q10);
 
         QuestionOptions option2Q10 = new QuestionOptions();
         option2Q10.setOptionText("Tuple");
-        option2Q10.setCorrect(false);
         option2Q10.setQuizQuestion(question10);
         questionOptionsRepository.save(option2Q10);
 
         QuestionOptions option3Q10 = new QuestionOptions();
         option3Q10.setOptionText("Set");
-        option3Q10.setCorrect(true);
         option3Q10.setQuizQuestion(question10);
         questionOptionsRepository.save(option3Q10);
 
         QuestionOptions option4Q10 = new QuestionOptions();
         option4Q10.setOptionText("Dictionary");
-        option4Q10.setCorrect(false);
         option4Q10.setQuizQuestion(question10);
         questionOptionsRepository.save(option4Q10);
     }

@@ -48,7 +48,7 @@ public class ViewController {
         model.addAttribute("username", username);
         model.addAttribute("questions", questions);
         model.addAttribute("user", user);
-        model.addAttribute("id", id);
+        model.addAttribute("quizId", id);
 
         return "quiz";
     }

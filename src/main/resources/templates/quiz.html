@@ -102,7 +102,7 @@
 
 <script>
     const quizId = [[${quizId}]]; // Dynamic quiz ID
-    const username = [[${user.username}]]; // Dynamic username
+    const username = '[[${user.username}]]'; // Dynamic username
 
     // Function to go to the next page
     function nextPage(pageNumber) {
@@ -126,7 +126,7 @@
             const selectedAnswer = input.value;
             userAnswers.push({ questionId: questionId, answer: selectedAnswer });
         });
-
+        console.log(userAnswers)
         // Sending user answers to the server
         fetch(`/api/quiz/${username}/submit`, {
             method: 'POST',

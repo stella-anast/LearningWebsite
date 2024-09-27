@@ -18,9 +18,6 @@ public class QuestionOptions {
     @Column(nullable = false)
     private String optionText;
 
-    @Column( nullable = false)
-    private boolean isCorrect;
-
     @JsonIgnoreProperties("options")
     @ToString.Exclude
     @ManyToOne
