@@ -67,4 +67,12 @@ public class UserAnswerService {
                 .collect(Collectors.toList());
     }
 
+    public List<Long> getIncorrectQuestionIds(UserEntity user, Long quizId) {
+        // Query repository to get all UserAnswer where isCorrect is false for the given user and quiz
+        return userAnswerRepository.findWrongAnswersByUserAndQuiz(user, quizId)
+                .stream()
+                .map(userAnswer -> userAnswer.getQuizQuestion().getId())  // Extract the ID from each UserAnswer
+                .collect(Collectors.toList());
+    }
+
 }

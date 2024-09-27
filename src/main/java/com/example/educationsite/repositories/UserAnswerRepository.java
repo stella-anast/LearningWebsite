@@ -3,6 +3,8 @@ package com.example.educationsite.repositories;
 import com.example.educationsite.models.QuizQuestion;
 import com.example.educationsite.models.UserAnswer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.example.educationsite.models.UserEntity;
 
@@ -13,4 +15,6 @@ import java.util.Optional;
 public interface UserAnswerRepository extends JpaRepository<UserAnswer, Long> {
     Optional<UserAnswer> findByUserEntityAndQuizQuestion(UserEntity userEntity, QuizQuestion quizQuestion);
     List<UserAnswer> findByUserEntityAndIsCorrectFalse(UserEntity user);
+    @Query("SELECT ua FROM UserAnswer ua WHERE ua.userEntity = :user AND ua.quizQuestion.quiz.id = :quizId AND ua.isCorrect = false")
+    List<UserAnswer> findWrongAnswersByUserAndQuiz(@Param("user") UserEntity user, @Param("quizId") Long quizId);
 }

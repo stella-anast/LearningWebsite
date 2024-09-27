@@ -29,7 +29,7 @@
 <div class="container quiz-container">
     <div class="card">
         <div class="card-header text-center">
-            <h3>Quiz <span th:text="${quizId}"></span>: solutions to your wrong answers</h3>
+            <h3><span th:if="${quizId == '0'}" th:text="'Retry quiz'"></span><span th:if="${quizId != '0'}" th:text="'Quiz ' + ${quizId}"></span>: solutions to your wrong answers</h3>
         </div>
 
         <div class="card-body">
