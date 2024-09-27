@@ -1,8 +1,11 @@
 package com.example.educationsite.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,7 +25,9 @@ public class QuizQuestion {
     private QuestionType questionType;
 
 
-    @OneToMany(mappedBy = "quizQuestion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "quizQuestion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("quizQuestion")
+    @ToString.Exclude
     private List<QuestionOptions> options;
 
     @Column(nullable = false)

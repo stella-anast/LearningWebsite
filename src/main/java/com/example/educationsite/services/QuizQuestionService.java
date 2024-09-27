@@ -1,16 +1,16 @@
 package com.example.educationsite.services;
 
-import com.example.educationsite.models.QuestionType;
-import com.example.educationsite.models.Quiz;
-import com.example.educationsite.models.QuizQuestion;
-import com.example.educationsite.models.QuestionOptions;
+import com.example.educationsite.models.*;
 import com.example.educationsite.repositories.QuizQuestionRepository;
 import com.example.educationsite.repositories.QuestionOptionsRepository;
 import com.example.educationsite.repositories.QuizRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuizQuestionService {
@@ -22,6 +22,12 @@ public class QuizQuestionService {
     private QuestionOptionsRepository questionOptionsRepository;
     @Autowired
     private QuizRepository quizRepository;
+
+    @Transactional
+    public List<QuizQuestion> findByQuizId(Long id) {
+        List<QuizQuestion> quizQuestions = quizQuestionRepository.findAllByQuizId(id);
+        return quizQuestions;
+    }
 
     @Transactional
     public void addQuizQuestions(Long quizId) {

@@ -1,8 +1,10 @@
 package com.example.educationsite.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @Data
@@ -19,6 +21,8 @@ public class QuestionOptions {
     @Column( nullable = false)
     private boolean isCorrect;
 
+    @JsonIgnoreProperties("options")
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "quiz_question_id", nullable = false)
     private QuizQuestion quizQuestion;
