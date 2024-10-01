@@ -13,7 +13,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Long quizId = 1L; 
+        Long quizId = 2L;
         //quizQuestionService.addQuizQuestions(quizId);
 
 

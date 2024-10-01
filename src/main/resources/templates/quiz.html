@@ -15,7 +15,7 @@
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
         }
         .card-header {
-            background-color: #007bff;
+            background-color: #1F487E;
             color: white;
             border-top-left-radius: 15px !important;
             border-top-right-radius: 15px !important;
@@ -43,39 +43,52 @@
 
         <div class="card-body">
             <hr>
-            <form id="quizForm">
-                <!-- Dynamic Pages with 3 questions each -->
-                <div th:each="page, pageStat : ${#numbers.sequence(0, questions.size() / 3)}">
-                    <div class="quiz-page" th:attr="id='page' + ${pageStat.index + 1}" th:style="${pageStat.index == 0} ? 'display:block;' : 'display:none;'">
-                        <div th:each="question, stat : ${questions}">
-                            <!-- Only show 3 questions per page -->
-                            <div th:if="${stat.index >= pageStat.index * 3 and stat.index < (pageStat.index + 1) * 3}">
-                                <h4 th:text="${stat.index + 1} + '. ' + ${question.question}"></h4>
-                                <div class="form-check" th:each="option : ${question.options}">
-                                    <input class="form-check-input" type="radio" th:name="${question.id}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${option.id}">
-                                    <label class="form-check-label" th:for="'q' + ${stat.index + 1} + 'a' + ${option.id}" th:text="${option.optionText}"></label>
+
+            <!-- Check if the questions list is empty -->
+            <div th:if="${questions.size() == 0}">
+                <h3 class="text-center">There are no questions available for this quiz.</h3>
+                <div class="text-center mt-4">
+                    <a th:href="@{/api/{username}/quizzes(username=${username})}" class="btn btn-primary">Return to Quiz Area</a>
+                </div>
+            </div>
+
+            <!-- Form and quiz pagination when questions exist -->
+            <div th:if="${questions.size() > 0}">
+                <form id="quizForm">
+                    <!-- Dynamic Pages with 3 questions each -->
+                    <div th:each="page, pageStat : ${#numbers.sequence(0, questions.size() / 3)}">
+                        <div class="quiz-page" th:attr="id='page' + ${pageStat.index + 1}" th:style="${pageStat.index == 0} ? 'display:block;' : 'display:none;'">
+                            <div th:each="question, stat : ${questions}">
+                                <!-- Only show 3 questions per page -->
+                                <div class="mb-3" th:if="${stat.index >= pageStat.index * 3 and stat.index < (pageStat.index + 1) * 3}">
+                                    <h4 th:text="${stat.index + 1} + '. ' + ${question.question}"></h4>
+                                    <div class="form-check" th:each="option : ${question.options}">
+                                        <input class="form-check-input" type="radio" th:name="${question.id}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${option.id}">
+                                        <label class="form-check-label" th:for="'q' + ${stat.index + 1} + 'a' + ${option.id}" th:text="${option.optionText}"></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Pagination Buttons -->
-                        <div class="d-flex justify-content-end mt-3">
-                            <button type="button" class="btn btn-secondary" th:if="${pageStat.index > 0}" th:onclick="'previousPage(' + (${pageStat.index}) + ')'">Previous</button>
-                            <button type="button" class="btn btn-primary ml-2" th:if="${pageStat.index < questions.size() / 3}" th:onclick="'nextPage(' + (${pageStat.index + 2}) + ')'">Next</button>
-                            <button type="button" class="btn btn-primary ml-2" th:if="${pageStat.index == questions.size() / 3}" data-bs-toggle="modal" data-bs-target="#submitModal">Submit</button>
+                            <!-- Pagination Buttons -->
+                            <div class="d-flex justify-content-end mt-3">
+                                <button type="button" class="btn btn-secondary" th:if="${pageStat.index > 0}" th:onclick="'previousPage(' + (${pageStat.index}) + ')'">Previous</button>
+                                <button type="button" class="btn btn-primary ml-2" th:if="${pageStat.index < questions.size() / 3}" th:onclick="'nextPage(' + (${pageStat.index + 2}) + ')'">Next</button>
+                                <button type="button" class="btn btn-primary ml-2" th:if="${pageStat.index == questions.size() / 3}" data-bs-toggle="modal" data-bs-target="#submitModal">Submit</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+
     <br>
     <div class="card" id="result-container" style="display:none;">
         <div class="card-body">
             <div id="result"></div>
         </div>
     </div>
+</div>
 
     <!-- Modal -->
     <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalCenterTitle" aria-hidden="true">

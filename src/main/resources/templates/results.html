@@ -33,16 +33,23 @@
         </div>
 
         <div class="card-body">
-            <!-- Display all questions without pagination -->
-            <div th:each="question, stat : ${questions}">
-                <h4 th:text="${stat.index + 1} + '. ' + ${question.question}"></h4>
-                <div class="form-check" th:each="option : ${question.options}">
-                    <!-- Radio button is disabled and we check if the option is the correct answer -->
-                    <input class="form-check-input" type="radio" th:name="${stat.index + 1}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${option.id}" disabled>
-                    <label class="form-check-label" th:for="'q' + ${stat.index + 1} + 'a' + ${option.id}" th:text="${option.optionText}"></label>
+            <!-- Check if there are no questions and display congratulations message -->
+            <div th:if="${#lists.isEmpty(questions)}">
+                <h4 class="text-center" style="color: green;">Congratulations! You got all the questions correct.</h4>
+            </div>
 
-                    <!-- Checkmark for correct answer -->
-                    <span th:if="${option.optionText == question.correctAnswer}" style="color: green;">&#10003;</span>
+            <!-- Display all questions if present -->
+            <div th:if="${!#lists.isEmpty(questions)}">
+                <div th:each="question, stat : ${questions}">
+                    <h4 th:text="${stat.index + 1} + '. ' + ${question.question}"></h4>
+                    <div class="form-check" th:each="option : ${question.options}">
+                        <!-- Radio button is disabled and we check if the option is the correct answer -->
+                        <input class="form-check-input" type="radio" th:name="${stat.index + 1}" th:value="${option.optionText}" th:id="'q' + ${stat.index + 1} + 'a' + ${option.id}" disabled>
+                        <label class="form-check-label" th:for="'q' + ${stat.index + 1} + 'a' + ${option.id}" th:text="${option.optionText}"></label>
+
+                        <!-- Checkmark for correct answer -->
+                        <span th:if="${option.optionText == question.correctAnswer}" style="color: green;">&#10003;</span>
+                    </div>
                 </div>
             </div>
 
@@ -52,9 +59,6 @@
             </div>
         </div>
     </div>
-</div>
-
-
 </div>
 
 </body>
