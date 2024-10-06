@@ -260,6 +260,63 @@ public class QuizQuestionService {
         option4Q8.setOptionText("Error");
         option4Q8.setQuizQuestion(question8);
         questionOptionsRepository.save(option4Q8);
+        
+        // Question 9 - What are the three numeric types in Python?
+        QuizQuestion question9 = new QuizQuestion();
+        question9.setQuestion("What are the three numeric types in Python?");
+        question9.setQuestionType(QuestionType.MULTIPLE_CHOICE);
+        question9.setCorrectAnswer("int, float, and complex");
+        question9.setQuiz(quiz);
+        quizQuestionRepository.save(question9);
+
+        QuestionOptions option1Q9 = new QuestionOptions();
+        option1Q9.setOptionText("int, float, and double");
+        option1Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option1Q9);
+
+        QuestionOptions option2Q9 = new QuestionOptions();
+        option2Q9.setOptionText("integer, decimal, and fraction");
+        option2Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option2Q9);
+
+        QuestionOptions option3Q9 = new QuestionOptions();
+        option3Q9.setOptionText("int, float, and complex");
+        option3Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option3Q9);
+
+        QuestionOptions option4Q9 = new QuestionOptions();
+        option4Q9.setOptionText("integer, float, and complex");
+        option4Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option4Q9);
+
+// Question 10 - What does the range() function do in Python?
+        QuizQuestion question10 = new QuizQuestion();
+        question10.setQuestion("What does the range() function do in Python?");
+        question10.setQuestionType(QuestionType.MULTIPLE_CHOICE);
+        question10.setCorrectAnswer("Returns a sequence of numbers");
+        question10.setQuiz(quiz);
+        quizQuestionRepository.save(question10);
+
+        QuestionOptions option1Q10 = new QuestionOptions();
+        option1Q10.setOptionText("Creates a list of random numbers");
+        option1Q10.setQuizQuestion(question10);
+        questionOptionsRepository.save(option1Q10);
+
+        QuestionOptions option2Q10 = new QuestionOptions();
+        option2Q10.setOptionText("Returns a sequence of numbers");
+        option2Q10.setQuizQuestion(question10);
+        questionOptionsRepository.save(option2Q10);
+
+        QuestionOptions option3Q10 = new QuestionOptions();
+        option3Q10.setOptionText("Generates a set of even numbers");
+        option3Q10.setQuizQuestion(question10);
+        questionOptionsRepository.save(option3Q10);
+
+        QuestionOptions option4Q10 = new QuestionOptions();
+        option4Q10.setOptionText("Reverses the order of a list");
+        option4Q10.setQuizQuestion(question10);
+        questionOptionsRepository.save(option4Q10);
+
     }
 
 
