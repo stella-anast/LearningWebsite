@@ -7,19 +7,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="completed_quizzes")
+@Table(name = "completed_quizzes")
 public class CompletedQuiz {
-    @Id
-    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="quiz_id",nullable = false)
-    private Quiz quiz;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id",nullable = false)
-    private UserEntity userEntity;
-
+    @EmbeddedId
+    private CompletedQuizId id;
     @Column(nullable = false)
-    private boolean isCompleted;
+    private boolean completed;
+
+    public CompletedQuiz(CompletedQuizId id, boolean completed) {
+        this.id = id;
+        this.completed = completed;
+    }
+
+    // Getters and setters
+
+    public CompletedQuizId getId() {
+        return id;
+    }
+
+    public void setId(CompletedQuizId id) {
+        this.id = id;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
 }

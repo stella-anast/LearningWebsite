@@ -1,13 +1,8 @@
 package com.example.educationsite.controllers;
 
 import com.example.educationsite.dto.QuizSubmissionDTO;
-import com.example.educationsite.services.QuizService;
-import com.example.educationsite.models.Quiz;
-import com.example.educationsite.models.QuizQuestion;
-import com.example.educationsite.models.UserEntity;
-import com.example.educationsite.services.QuizQuestionService;
-import com.example.educationsite.services.UserAnswerService;
-import com.example.educationsite.services.UserService;
+import com.example.educationsite.models.*;
+import com.example.educationsite.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,7 +25,6 @@ public class ViewController {
     private QuizService quizService;
     @Autowired
     private UserAnswerService answerService;
-
 
     @GetMapping("/statistics/{userId}/{quizId}")
     public String getStatistics(@PathVariable String username,@PathVariable Long userId, @PathVariable Long quizId) {
@@ -87,6 +81,7 @@ public class ViewController {
         Long quizId = submission.getQuizId();  // quizId can now be String or Long
         List<QuizSubmissionDTO.AnswerDTO> answers = submission.getAnswers();
         List<QuizQuestion> questions;
+        Boolean lessonQuiz = false;
 
         if (quizId == 0.0) {
             List<Long> questionIds = answers.stream()
@@ -98,6 +93,7 @@ public class ViewController {
         } else if (quizId instanceof Long) {
             // If quizId is a Long, fetch all questions by quizId
             questions = quizQuestionService.findByQuizId((Long) quizId);
+            lessonQuiz = true;
         } else {
             throw new IllegalArgumentException("Invalid quizId type");
         }
@@ -105,8 +101,32 @@ public class ViewController {
         UserEntity user = userService.findByUsername(username);
 
         // Iterate through the questions and save the answers
+        int correctAnswers = 0;
         for (QuizQuestion question : questions) {
-            answerService.saveUserAnswers(user, answers, question);  // Assume there's a service to handle saving UserAnswer
+            Boolean correct = answerService.saveUserAnswer(user, answers, question);  // save and return boolean isCorrect
+            if(correct){
+                correctAnswers++;
+            }
+        }
+        int score = (correctAnswers * 100) / questions.size();
+
+        if(lessonQuiz){
+            Quiz q = quizService.findById(quizId);
+            // define composite id
+            CompletedQuizId id = new CompletedQuizId();
+            id.setUserId(user.getId());
+            id.setQuizId(quizId);
+            // define entry
+            CompletedQuiz completedQuiz = new CompletedQuiz();
+            completedQuiz.setId(id);
+            if(score >= 80){
+                completedQuiz.setCompleted(true);
+            }
+            else{
+                completedQuiz.setCompleted(false);
+            }
+            answerService.submitQuiz(completedQuiz);
+            System.out.println(score);
         }
 
         // Redirect to another controller to show the results

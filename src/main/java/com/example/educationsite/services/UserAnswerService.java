@@ -1,9 +1,8 @@
 package com.example.educationsite.services;
 
 import com.example.educationsite.dto.QuizSubmissionDTO;
-import com.example.educationsite.models.QuizQuestion;
-import com.example.educationsite.models.UserAnswer;
-import com.example.educationsite.models.UserEntity;
+import com.example.educationsite.models.*;
+import com.example.educationsite.repositories.CompletedQuizRepository;
 import com.example.educationsite.repositories.UserAnswerRepository;
 import com.example.educationsite.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,8 +18,10 @@ public class UserAnswerService {
 
     @Autowired
     private UserAnswerRepository userAnswerRepository;
+    @Autowired
+    private CompletedQuizRepository completedQuizRepository;
 
-    public void saveUserAnswers(UserEntity user, List<QuizSubmissionDTO.AnswerDTO> answers, QuizQuestion question) {
+    public Boolean saveUserAnswer(UserEntity user, List<QuizSubmissionDTO.AnswerDTO> answers, QuizQuestion question) {
             Long questionId = question.getId();
             String correctAnswer = question.getCorrectAnswer();
 
@@ -52,6 +54,7 @@ public class UserAnswerService {
             }
             // Save the user's answer to the repository
             userAnswerRepository.save(userAnswer);
+            return userAnswer.isCorrect();
     }
 
     // Method to find existing UserAnswer by user and question
@@ -81,6 +84,20 @@ public class UserAnswerService {
                 .stream()
                 .map(userAnswer -> userAnswer.getQuizQuestion().getId())  // Extract the ID from each UserAnswer
                 .collect(Collectors.toList());
+    }
+
+    public CompletedQuiz submitQuiz(CompletedQuiz completedQuiz){
+        // Check if the entry already exists
+        Optional<CompletedQuiz> existingCompletedQuiz = completedQuizRepository.findById(completedQuiz.getId());
+        if (existingCompletedQuiz.isPresent()) {
+            // Update the existing record with new data
+            CompletedQuiz existingQuiz = existingCompletedQuiz.get();
+            existingQuiz.setCompleted(completedQuiz.isCompleted());
+            return completedQuizRepository.save(existingQuiz);
+        } else {
+            // Save a new record if not already present
+            return completedQuizRepository.save(completedQuiz);
+        }
     }
 
 }
