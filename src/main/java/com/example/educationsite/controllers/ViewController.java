@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -160,9 +161,25 @@ public class ViewController {
     public String showQuizzes(@PathVariable String username, Model model) {
         UserEntity user = userService.findByUsername(username);
         List<Quiz> quizzes = quizService.findAll();
+
+        // Prepare a map of quiz IDs to completion status
+        Map<Long, Boolean> quizCompletionStatus = new HashMap<>();
+
+        for (Quiz quiz : quizzes) {
+            // Check if the quiz has been completed by the user
+            CompletedQuizId completedQuizId = new CompletedQuizId(quiz.getId(), user.getId());
+            Optional<CompletedQuiz> completedQuiz = answerService.findSubmissionById(completedQuizId);
+            quizCompletionStatus.put(quiz.getId(),
+                    completedQuiz.map(CompletedQuiz::isCompleted).orElse(null)
+            );
+        }
+        boolean allQuizzesCompleted = quizCompletionStatus.values().stream().allMatch(Boolean.TRUE::equals);
         model.addAttribute("username", username);
         model.addAttribute("quizzes", quizzes);
         model.addAttribute("user", user);
+        model.addAttribute("allQuizzesCompleted", allQuizzesCompleted);
+        model.addAttribute("quizCompletionStatus", quizCompletionStatus);  // Add quiz completion status to the model
+
         return "quizzes";
     }
     @GetMapping("/dashboard")

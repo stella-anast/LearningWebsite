@@ -100,4 +100,7 @@ public class UserAnswerService {
         }
     }
 
+    public Optional<CompletedQuiz> findSubmissionById(CompletedQuizId completedQuizId) {
+        return completedQuizRepository.findById(completedQuizId);
+    }
 }
