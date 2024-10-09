@@ -113,19 +113,43 @@ public class ViewController {
             Quiz q = quizService.findById(quizId);
             // define composite id
             CompletedQuizId id = new CompletedQuizId();
-            id.setUserId(user.getId());
+            Long uid = user.getId();
+            id.setUserId(uid);
             id.setQuizId(quizId);
             // define entry
             CompletedQuiz completedQuiz = new CompletedQuiz();
             completedQuiz.setId(id);
-            if(score >= 80){
-                completedQuiz.setCompleted(true);
-            }
-            else{
-                completedQuiz.setCompleted(false);
-            }
+            completedQuiz.setCompleted(score >= 80);
             answerService.submitQuiz(completedQuiz);
-            System.out.println(score);
+            // Check if unit is complete after this submission
+            if(score>=80){
+                Long lessonId = q.getLesson().getId();
+                List<Quiz> unitQuizzes = quizService.findBySkillLevel(lessonId);
+                boolean levelup = true;
+                for(Quiz quiz : unitQuizzes){
+                    CompletedQuizId qId = new CompletedQuizId();
+                    qId.setUserId(uid);
+                    qId.setQuizId(quiz.getId());
+                    Optional<CompletedQuiz> cq = answerService.findSubmissionById(qId);
+                    // if cq is not present or !cq.get().isCompleted(), set levelup to false and break the loop
+                    if (cq.isEmpty() || !cq.get().isCompleted()) {
+                        levelup = false;
+                        break;  // Exit the loop as soon as one quiz is not completed
+                    }
+                }
+                System.out.println(levelup);
+                if(levelup){
+                    try{
+                        SkillLevel currentLevel = user.getSkillLevel();
+                        SkillLevel nextLevel = currentLevel.next();
+                        user.setSkillLevel(nextLevel);
+                        userService.updateUserSkill(user);
+                    }
+                    catch (Exception e){
+                        System.out.println(e.toString());
+                    }
+                }
+            }
         }
 
         // Redirect to another controller to show the results

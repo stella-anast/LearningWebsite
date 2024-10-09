@@ -2,6 +2,7 @@ package com.example.educationsite.services;
 import com.example.educationsite.models.UserEntity;
 import com.example.educationsite.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,16 @@ public class UserService {
         return userOptional.orElse(null);
     }
 
+    public boolean updateUserSkill(UserEntity user){
+        try {
+            // Save the updated user entity with the new skill level
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            // Handle any potential exceptions
+            System.out.println("Error updating user skill: " + e.toString());
+            return false;
+        }
+    }
 
 }
