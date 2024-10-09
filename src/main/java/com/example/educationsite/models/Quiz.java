@@ -14,7 +14,7 @@ public class Quiz {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="lesson_id",nullable = false)
     private Lesson lesson;
 

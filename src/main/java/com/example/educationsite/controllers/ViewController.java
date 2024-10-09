@@ -1,5 +1,6 @@
 package com.example.educationsite.controllers;
 
+import com.example.educationsite.SkillLevel;
 import com.example.educationsite.dto.QuizSubmissionDTO;
 import com.example.educationsite.models.*;
 import com.example.educationsite.services.*;
@@ -9,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -160,7 +158,7 @@ public class ViewController {
     @GetMapping("/quizzes")
     public String showQuizzes(@PathVariable String username, Model model) {
         UserEntity user = userService.findByUsername(username);
-        List<Quiz> quizzes = quizService.findAll();
+        List<Quiz> quizzes = quizService.findBySkillLevel(mapSkillLevelToLessonId(user.getSkillLevel()));
 
         // Prepare a map of quiz IDs to completion status
         Map<Long, Boolean> quizCompletionStatus = new HashMap<>();
@@ -173,9 +171,17 @@ public class ViewController {
                     completedQuiz.map(CompletedQuiz::isCompleted).orElse(null)
             );
         }
+
+        // Group, sort by Lesson ID in ascending order, and collect entries
+        List<Map.Entry<Lesson, List<Quiz>>> quizzesByLesson = quizzes.stream()
+                .collect(Collectors.groupingBy(Quiz::getLesson))
+                .entrySet().stream()
+                .sorted(Map.Entry.<Lesson, List<Quiz>>comparingByKey(Comparator.comparingLong(Lesson::getId))) // Ascending order
+                .collect(Collectors.toList());
+
         boolean allQuizzesCompleted = quizCompletionStatus.values().stream().allMatch(Boolean.TRUE::equals);
         model.addAttribute("username", username);
-        model.addAttribute("quizzes", quizzes);
+        model.addAttribute("quizzesByLesson", quizzesByLesson);
         model.addAttribute("user", user);
         model.addAttribute("allQuizzesCompleted", allQuizzesCompleted);
         model.addAttribute("quizCompletionStatus", quizCompletionStatus);  // Add quiz completion status to the model
@@ -187,6 +193,19 @@ public class ViewController {
         UserEntity user = userService.findByUsername(username);
         model.addAttribute("user", user);
         return "dashboard";
+    }
+
+    private Long mapSkillLevelToLessonId(SkillLevel skillLevel) {
+        switch (skillLevel) {
+            case BEGINNER:
+                return 1L;  // Lesson ID for Beginner
+            case INTERMEDIATE:
+                return 2L;  // Lesson ID for Intermediate
+            case PRO:
+                return 3L;  // Lesson ID for Pro
+            default:
+                throw new IllegalArgumentException("Unknown skill level: " + skillLevel);
+        }
     }
 
 }

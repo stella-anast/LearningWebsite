@@ -25,6 +25,5 @@ public class DataInitializer implements CommandLineRunner {
         quizQuestionService.addQuizQuestions5(quizId);
         quizId = 6L;
         quizQuestionService.addQuizQuestions6(quizId);
-
     }
 }

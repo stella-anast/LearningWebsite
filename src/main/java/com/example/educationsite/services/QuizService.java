@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface QuizService {
     List<Quiz> findAll();
+    List<Quiz> findBySkillLevel(Long lessonId);
     Quiz findById(Long id);
 }

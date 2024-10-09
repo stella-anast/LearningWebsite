@@ -8,34 +8,48 @@
 </head>
 <body style="background-color: #B0C4DE" layout:fragment="content">
 <div class="container mt-5">
-    <h1>Select a Quiz</h1>
-    <hr>
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1 style="margin-bottom: 0px;">Select a Quiz</h1>
+        <span class="badge badge-pill badge-info" title="Your current skill level" data-toggle="tooltip" style="font-size: 1rem; padding: 0.5em 1em;" th:text="${user.skillLevel}">Beginner</span>
+    </div>
+    <hr style="margin-top: 8px;">
     <div class="list-group">
         <div>
-            <a th:href="@{/api/{username}/quizzes/quiz/retry(username=${username})}"
-               th:text="'Retake questions you got wrong'"
-               class="list-group-item list-group-item-action"></a>
+            <a th:href="@{/api/{username}/quizzes/quiz/retry(username=${username})}" th:text="'Retake questions you got wrong'" class="list-group-item list-group-item-action"></a>
         </div>
         <br>
-        <h3>Beginner-level quizzes
-            <span class="badge badge-secondary">
-                <span th:text="${allQuizzesCompleted ? 'Completed' : 'Not completed'}"></span>
-            </span>
-        </h3>
-        <br>
-        <div th:each="quiz : ${quizzes}" class="list-group-item">
-            <a th:href="@{/api/{username}/quizzes/quiz/{quizId}(username=${username}, quizId=${quiz.id})}"
-               class="d-flex list-group-item-action text-decoration-none">
-                <span th:text="'Quiz ' + ${quiz.id}"></span>
 
-                <span th:if="${quizCompletionStatus[quiz.id] != null}" th:class="${quizCompletionStatus[quiz.id] ? 'text-success ml-2' : 'text-danger ml-2'}">
-                    <i th:class="${quizCompletionStatus[quiz.id] ? 'bi bi-check-circle' : 'bi bi-x-circle'}"></i>
+        <!-- Iterate over quizzes categorized by lesson -->
+        <div th:each="entry : ${quizzesByLesson}" class="lesson-group">
+            <h4 th:text="${entry.key.skillLevel} + ' Level Quizzes'">
+                // TODO: FIX
+                <span class="badge badge-secondary">
+                    <span th:text="${allQuizzesCompleted ? 'Completed' : 'Not completed'}"></span>
                 </span>
-            </a>
+            </h4> <!-- Display the Lesson skill level -->
+            <div th:each="quiz : ${entry.value}" class="list-group-item">
+                <a th:href="@{/api/{username}/quizzes/quiz/{quizId}(username=${username}, quizId=${quiz.id})}" class="d-flex list-group-item-action text-decoration-none">
+                    <span th:text="'Quiz ' + ${quiz.id}"></span>
+
+                    <span th:if="${quizCompletionStatus[quiz.id] != null}"
+                          th:class="${quizCompletionStatus[quiz.id] ? 'text-success ml-2' : 'text-danger ml-2'}">
+                        <i th:class="${quizCompletionStatus[quiz.id] ? 'bi bi-check-circle' : 'bi bi-x-circle'}"></i>
+                    </span>
+                </a>
+            </div>
+            <br>
         </div>
         <br>
-        <h3>To unlock quizzes from other levels, please complete previous</h3>
+        <h3 th:if="user.skillLevel.String!='PRO'">To unlock quizzes from other levels, please complete previous quizzes.</h3>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip(); // Initialize tooltip
+    });
+</script>
+
 </body>
 </html>
+
