@@ -161,7 +161,7 @@ public class QuizQuestionService {
 
         QuizQuestion question7 = new QuizQuestion();
         question7.setQuestion("In Python, variables are automatically declared when a value is assigned.");
-        question7.setQuestionType(QuestionType.MULTIPLE_CHOICE);
+        question7.setQuestionType(QuestionType.TRUE_FALSE);
         question7.setCorrectAnswer("True");
         question7.setQuiz(quiz);
         quizQuestionRepository.save(question7);
@@ -516,7 +516,7 @@ public class QuizQuestionService {
         option4Q9.setQuizQuestion(question9);
         questionOptionsRepository.save(option4Q9);
 
-// Question 10 - What does the range() function do in Python?
+        // Question 10 - What does the range() function do in Python?
         QuizQuestion question10 = new QuizQuestion();
         question10.setQuestion("What does the range() function do in Python?");
         question10.setQuestionType(QuestionType.MULTIPLE_CHOICE);
@@ -609,11 +609,21 @@ public class QuizQuestionService {
 
         // Question 3 - True or False: Python uses indentation to define blocks of code.
         QuizQuestion question3 = new QuizQuestion();
-        question3.setQuestion("True or False: Python uses indentation to define blocks of code.");
+        question3.setQuestion("Python uses indentation to define blocks of code.");
         question3.setQuestionType(QuestionType.TRUE_FALSE);
         question3.setCorrectAnswer("True");
         question3.setQuiz(quiz);
         quizQuestionRepository.save(question3);
+
+        QuestionOptions option1Q3 = new QuestionOptions();
+        option1Q3.setOptionText("True");
+        option1Q3.setQuizQuestion(question3);
+        questionOptionsRepository.save(option1Q3);
+
+        QuestionOptions option2Q3 = new QuestionOptions();
+        option2Q3.setOptionText("False");
+        option2Q3.setQuizQuestion(question3);
+        questionOptionsRepository.save(option2Q3);
 
         // Question 4 - Which of the following is not a data structure in Python?
         QuizQuestion question4 = new QuizQuestion();
@@ -673,11 +683,21 @@ public class QuizQuestionService {
 
         // Question 6 - True or False: Python is a statically typed language.
         QuizQuestion question6 = new QuizQuestion();
-        question6.setQuestion("True or False: Python is a statically typed language.");
+        question6.setQuestion("Python is a statically typed language.");
         question6.setQuestionType(QuestionType.TRUE_FALSE);
         question6.setCorrectAnswer("False");
         question6.setQuiz(quiz);
         quizQuestionRepository.save(question6);
+
+        QuestionOptions option1Q6 = new QuestionOptions();
+        option1Q6.setOptionText("True");
+        option1Q6.setQuizQuestion(question6);
+        questionOptionsRepository.save(option1Q6);
+
+        QuestionOptions option2Q6 = new QuestionOptions();
+        option2Q6.setOptionText("False");
+        option2Q6.setQuizQuestion(question6);
+        questionOptionsRepository.save(option2Q6);
 
         // Question 7 - What keyword is used to define a function in Python?
         QuizQuestion question7 = new QuizQuestion();
@@ -737,11 +757,21 @@ public class QuizQuestionService {
 
         // Question 9 - True or False: Python lists can contain mixed data types.
         QuizQuestion question9 = new QuizQuestion();
-        question9.setQuestion("True or False: Python lists can contain mixed data types.");
+        question9.setQuestion("Python lists can contain mixed data types.");
         question9.setQuestionType(QuestionType.TRUE_FALSE);
         question9.setCorrectAnswer("True");
         question9.setQuiz(quiz);
         quizQuestionRepository.save(question9);
+
+        QuestionOptions option1Q9 = new QuestionOptions();
+        option1Q9.setOptionText("True");
+        option1Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option1Q9);
+
+        QuestionOptions option2Q9 = new QuestionOptions();
+        option2Q9.setOptionText("False");
+        option2Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option2Q9);
 
         // Question 10 - What will be the output of 3 * 'abc'?
         QuizQuestion question10 = new QuizQuestion();
@@ -807,11 +837,21 @@ public class QuizQuestionService {
 
         // Question 2 - True or False: Python supports lists and tuples.
         QuizQuestion question2 = new QuizQuestion();
-        question2.setQuestion("True or False: Python supports lists and tuples.");
+        question2.setQuestion("Python supports lists and tuples.");
         question2.setQuestionType(QuestionType.TRUE_FALSE);
         question2.setCorrectAnswer("True");
         question2.setQuiz(quiz);
         quizQuestionRepository.save(question2);
+
+        QuestionOptions option1Q2 = new QuestionOptions();
+        option1Q2.setOptionText("True");
+        option1Q2.setQuizQuestion(question2);
+        questionOptionsRepository.save(option1Q2);
+
+        QuestionOptions option2Q2 = new QuestionOptions();
+        option2Q2.setOptionText("False");
+        option2Q2.setQuizQuestion(question2);
+        questionOptionsRepository.save(option2Q2);
 
         // Question 3 - How do you remove a key from a dictionary?
         QuizQuestion question3 = new QuizQuestion();
@@ -871,11 +911,21 @@ public class QuizQuestionService {
 
         // Question 5 - True or False: Python uses a compiler to run the code.
         QuizQuestion question5 = new QuizQuestion();
-        question5.setQuestion("True or False: Python uses a compiler to run the code.");
+        question5.setQuestion("Python uses a compiler to run the code.");
         question5.setQuestionType(QuestionType.TRUE_FALSE);
         question5.setCorrectAnswer("False");
         question5.setQuiz(quiz);
         quizQuestionRepository.save(question5);
+
+        QuestionOptions option1Q5 = new QuestionOptions();
+        option1Q5.setOptionText("True");
+        option1Q5.setQuizQuestion(question5);
+        questionOptionsRepository.save(option1Q5);
+
+        QuestionOptions option2Q5 = new QuestionOptions();
+        option2Q5.setOptionText("False");
+        option2Q5.setQuizQuestion(question5);
+        questionOptionsRepository.save(option2Q5);
 
         // Question 6 - What is the use of the input() function in Python?
         QuizQuestion question6 = new QuizQuestion();
@@ -907,11 +957,21 @@ public class QuizQuestionService {
 
         // Question 7 - True or False: A lambda function can have multiple expressions.
         QuizQuestion question7 = new QuizQuestion();
-        question7.setQuestion("True or False: A lambda function can have multiple expressions.");
+        question7.setQuestion("A lambda function can have multiple expressions.");
         question7.setQuestionType(QuestionType.TRUE_FALSE);
         question7.setCorrectAnswer("False");
         question7.setQuiz(quiz);
         quizQuestionRepository.save(question7);
+
+        QuestionOptions option1Q7 = new QuestionOptions();
+        option1Q7.setOptionText("True");
+        option1Q7.setQuizQuestion(question7);
+        questionOptionsRepository.save(option1Q7);
+
+        QuestionOptions option2Q7 = new QuestionOptions();
+        option2Q7.setOptionText("False");
+        option2Q7.setQuizQuestion(question7);
+        questionOptionsRepository.save(option2Q7);
 
         // Question 8 - What is the purpose of the global keyword in Python?
         QuizQuestion question8 = new QuizQuestion();
@@ -971,11 +1031,21 @@ public class QuizQuestionService {
 
         // Question 10 - True or False: Python is an interpreted language.
         QuizQuestion question10 = new QuizQuestion();
-        question10.setQuestion("True or False: Python is an interpreted language.");
+        question10.setQuestion("Python is an interpreted language.");
         question10.setQuestionType(QuestionType.TRUE_FALSE);
         question10.setCorrectAnswer("True");
         question10.setQuiz(quiz);
         quizQuestionRepository.save(question10);
+
+        QuestionOptions option1Q10 = new QuestionOptions();
+        option1Q10.setOptionText("True");
+        option1Q10.setQuizQuestion(question10);
+        questionOptionsRepository.save(option1Q10);
+
+        QuestionOptions option2Q10 = new QuestionOptions();
+        option2Q10.setOptionText("False");
+        option2Q10.setQuizQuestion(question10);
+        questionOptionsRepository.save(option2Q10);
     }
     //1st quiz expert-quiz_id=5
     @Transactional
@@ -985,11 +1055,21 @@ public class QuizQuestionService {
 
         // Question 1 - True or False: In Python, functions are first-class objects.
         QuizQuestion question1 = new QuizQuestion();
-        question1.setQuestion("True or False: In Python, functions are first-class objects.");
+        question1.setQuestion("In Python, functions are first-class objects.");
         question1.setQuestionType(QuestionType.TRUE_FALSE);
         question1.setCorrectAnswer("True");
         question1.setQuiz(quiz);
         quizQuestionRepository.save(question1);
+
+        QuestionOptions option1Q1 = new QuestionOptions();
+        option1Q1.setOptionText("True");
+        option1Q1.setQuizQuestion(question1);
+        questionOptionsRepository.save(option1Q1);
+
+        QuestionOptions option2Q1 = new QuestionOptions();
+        option2Q1.setOptionText("False");
+        option2Q1.setQuizQuestion(question1);
+        questionOptionsRepository.save(option2Q1);
 
         // Question 2 - Which method allows any Python callable object to be invoked like a function?
         QuizQuestion question2 = new QuizQuestion();
@@ -1021,11 +1101,21 @@ public class QuizQuestionService {
 
         // Question 3 - True or False: The keyword `lambda` is used to define anonymous functions.
         QuizQuestion question3 = new QuizQuestion();
-        question3.setQuestion("True or False: The keyword `lambda` is used to define anonymous functions.");
+        question3.setQuestion("The keyword `lambda` is used to define anonymous functions.");
         question3.setQuestionType(QuestionType.TRUE_FALSE);
         question3.setCorrectAnswer("True");
         question3.setQuiz(quiz);
         quizQuestionRepository.save(question3);
+
+        QuestionOptions option1Q3 = new QuestionOptions();
+        option1Q3.setOptionText("True");
+        option1Q3.setQuizQuestion(question3);
+        questionOptionsRepository.save(option1Q3);
+
+        QuestionOptions option2Q3 = new QuestionOptions();
+        option2Q3.setOptionText("False");
+        option2Q3.setQuizQuestion(question3);
+        questionOptionsRepository.save(option2Q3);
 
         // Question 4 - In Python, which module is used for multi-dimensional arrays?
         QuizQuestion question4 = new QuizQuestion();
@@ -1057,11 +1147,21 @@ public class QuizQuestionService {
 
         // Question 5 - True or False: Lists in Python can be used to represent two-dimensional arrays.
         QuizQuestion question5 = new QuizQuestion();
-        question5.setQuestion("True or False: Lists in Python can be used to represent two-dimensional arrays.");
+        question5.setQuestion("Lists in Python can be used to represent two-dimensional arrays.");
         question5.setQuestionType(QuestionType.TRUE_FALSE);
         question5.setCorrectAnswer("True");
         question5.setQuiz(quiz);
         quizQuestionRepository.save(question5);
+
+        QuestionOptions option1Q5 = new QuestionOptions();
+        option1Q5.setOptionText("True");
+        option1Q5.setQuizQuestion(question5);
+        questionOptionsRepository.save(option1Q5);
+
+        QuestionOptions option2Q5 = new QuestionOptions();
+        option2Q5.setOptionText("False");
+        option2Q5.setQuizQuestion(question5);
+        questionOptionsRepository.save(option2Q5);
 
         // Question 6 - What will be the output of print([i for i in range(3)])?
         QuizQuestion question6 = new QuizQuestion();
@@ -1093,11 +1193,21 @@ public class QuizQuestionService {
 
         // Question 7 - True or False: `__getitem__()` is a method used to access items via indexing in Python.
         QuizQuestion question7 = new QuizQuestion();
-        question7.setQuestion("True or False: `__getitem__()` is a method used to access items via indexing in Python.");
+        question7.setQuestion("The `__getitem__()` is a method used to access items via indexing in Python.");
         question7.setQuestionType(QuestionType.TRUE_FALSE);
         question7.setCorrectAnswer("True");
         question7.setQuiz(quiz);
         quizQuestionRepository.save(question7);
+
+        QuestionOptions option1Q7 = new QuestionOptions();
+        option1Q7.setOptionText("True");
+        option1Q7.setQuizQuestion(question7);
+        questionOptionsRepository.save(option1Q7);
+
+        QuestionOptions option2Q7 = new QuestionOptions();
+        option2Q7.setOptionText("False");
+        option2Q7.setQuizQuestion(question7);
+        questionOptionsRepository.save(option2Q7);
 
         // Question 8 - Which Python function is used to inspect the attributes of a function object?
         QuizQuestion question8 = new QuizQuestion();
@@ -1129,11 +1239,21 @@ public class QuizQuestionService {
 
         // Question 9 - True or False: A two-dimensional array can be represented as a list of lists in Python.
         QuizQuestion question9 = new QuizQuestion();
-        question9.setQuestion("True or False: A two-dimensional array can be represented as a list of lists in Python.");
+        question9.setQuestion("A two-dimensional array can be represented as a list of lists in Python.");
         question9.setQuestionType(QuestionType.TRUE_FALSE);
         question9.setCorrectAnswer("True");
         question9.setQuiz(quiz);
         quizQuestionRepository.save(question9);
+
+        QuestionOptions option1Q9 = new QuestionOptions();
+        option1Q9.setOptionText("True");
+        option1Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option1Q9);
+
+        QuestionOptions option2Q9 = new QuestionOptions();
+        option2Q9.setOptionText("False");
+        option2Q9.setQuizQuestion(question9);
+        questionOptionsRepository.save(option2Q9);
 
         // Question 10 - Which type of object is used to handle multi-threading in Python?
         QuizQuestion question10 = new QuizQuestion();
@@ -1171,47 +1291,57 @@ public class QuizQuestionService {
 
         // Question 1 - True or False: Functions in Python are not objects and cannot be assigned to variables.
         QuizQuestion question1 = new QuizQuestion();
-        question1.setQuestion("True or False: Functions in Python are not objects and cannot be assigned to variables.");
+        question1.setQuestion("Functions in Python are not objects and cannot be assigned to variables.");
         question1.setQuestionType(QuestionType.TRUE_FALSE);
         question1.setCorrectAnswer("False");
         question1.setQuiz(quiz);
         quizQuestionRepository.save(question1);
 
-        // Question 2 - Which Python module is most commonly used for numerical computation with multi-dimensional arrays?
-        QuizQuestion question2 = new QuizQuestion();
-        question2.setQuestion("Which Python module is most commonly used for numerical computation with multi-dimensional arrays?");
-        question2.setQuestionType(QuestionType.MULTIPLE_CHOICE);
-        question2.setCorrectAnswer("NumPy");
-        question2.setQuiz(quiz);
-        quizQuestionRepository.save(question2);
+        // Question 2 - Which Python library is commonly used for data manipulation and analysis,especially with tabular data?
+       QuizQuestion question2 = new QuizQuestion();
+       question2.setQuestion("Which Python library is commonly used for data manipulation and analysis,especially with tabular data?");
+       question2.setQuestionType(QuestionType.MULTIPLE_CHOICE);
+       question2.setCorrectAnswer("Pandas");
+       question2.setQuiz(quiz);
+       quizQuestionRepository.save(question2);
 
-        QuestionOptions option1Q2 = new QuestionOptions();
-        option1Q2.setOptionText("array");
-        option1Q2.setQuizQuestion(question2);
-        questionOptionsRepository.save(option1Q2);
+       QuestionOptions option1Q2 = new QuestionOptions();
+       option1Q2.setOptionText("Pandas");
+       option1Q2.setQuizQuestion(question2);
+       questionOptionsRepository.save(option1Q2);
 
-        QuestionOptions option2Q2 = new QuestionOptions();
-        option2Q2.setOptionText("NumPy");
-        option2Q2.setQuizQuestion(question2);
-        questionOptionsRepository.save(option2Q2);
+       QuestionOptions option2Q2 = new QuestionOptions();
+       option2Q2.setOptionText("SciPy");
+       option2Q2.setQuizQuestion(question2);
+       questionOptionsRepository.save(option2Q2);
 
-        QuestionOptions option3Q2 = new QuestionOptions();
-        option3Q2.setOptionText("collections");
-        option3Q2.setQuizQuestion(question2);
-        questionOptionsRepository.save(option3Q2);
+       QuestionOptions option3Q2 = new QuestionOptions();
+       option3Q2.setOptionText("Matplotlib");
+       option3Q2.setQuizQuestion(question2);
+       questionOptionsRepository.save(option3Q2);
 
-        QuestionOptions option4Q2 = new QuestionOptions();
-        option4Q2.setOptionText("math");
-        option4Q2.setQuizQuestion(question2);
-        questionOptionsRepository.save(option4Q2);
+       QuestionOptions option4Q2 = new QuestionOptions();
+       option4Q2.setOptionText("Seaborn");
+       option4Q2.setQuizQuestion(question2);
+       questionOptionsRepository.save(option4Q2);
 
-        // Question 3 - True or False: The `__init__()` method is used to initialize an object in Python.
+       // Question 3 - True or False: The `__init__()` method is used to initialize an object in Python.
         QuizQuestion question3 = new QuizQuestion();
-        question3.setQuestion("True or False: The `__init__()` method is used to initialize an object in Python.");
+        question3.setQuestion("The `__init__()` method is used to initialize an object in Python.");
         question3.setQuestionType(QuestionType.TRUE_FALSE);
         question3.setCorrectAnswer("True");
         question3.setQuiz(quiz);
         quizQuestionRepository.save(question3);
+
+       QuestionOptions option1Q3 = new QuestionOptions();
+       option1Q3.setOptionText("True");
+       option1Q3.setQuizQuestion(question3);
+       questionOptionsRepository.save(option1Q3);
+
+       QuestionOptions option2Q3 = new QuestionOptions();
+       option2Q3.setOptionText("False");
+       option2Q3.setQuizQuestion(question3);
+       questionOptionsRepository.save(option2Q3);
 
         // Question 4 - What is the output of the following list comprehension: `[x**2 for x in range(4)]`?
         QuizQuestion question4 = new QuizQuestion();
@@ -1243,11 +1373,21 @@ public class QuizQuestionService {
 
         // Question 5 - True or False: A `TypeError` occurs when accessing a list with a float index in Python.
         QuizQuestion question5 = new QuizQuestion();
-        question5.setQuestion("True or False: A `TypeError` occurs when accessing a list with a float index in Python.");
+        question5.setQuestion("A `TypeError` occurs when accessing a list with a float index in Python.");
         question5.setQuestionType(QuestionType.TRUE_FALSE);
         question5.setCorrectAnswer("True");
         question5.setQuiz(quiz);
         quizQuestionRepository.save(question5);
+
+       QuestionOptions option1Q5 = new QuestionOptions();
+       option1Q5.setOptionText("True");
+       option1Q5.setQuizQuestion(question5);
+       questionOptionsRepository.save(option1Q5);
+
+       QuestionOptions option2Q5 = new QuestionOptions();
+       option2Q5.setOptionText("False");
+       option2Q5.setQuizQuestion(question5);
+       questionOptionsRepository.save(option2Q5);
 
         // Question 6 - Which of these statements is true regarding list slicing in Python?
         QuizQuestion question6 = new QuizQuestion();
@@ -1279,11 +1419,21 @@ public class QuizQuestionService {
 
         // Question 7 - True or False: The method `__setitem__()` is used to set a value at a particular index in Python.
         QuizQuestion question7 = new QuizQuestion();
-        question7.setQuestion("True or False: The method `__setitem__()` is used to set a value at a particular index in Python.");
+        question7.setQuestion("The method `__setitem__()` is used to set a value at a particular index in Python.");
         question7.setQuestionType(QuestionType.TRUE_FALSE);
         question7.setCorrectAnswer("True");
         question7.setQuiz(quiz);
         quizQuestionRepository.save(question7);
+
+       QuestionOptions option1Q7 = new QuestionOptions();
+       option1Q7.setOptionText("True");
+       option1Q7.setQuizQuestion(question7);
+       questionOptionsRepository.save(option1Q7);
+
+       QuestionOptions option2Q7 = new QuestionOptions();
+       option2Q7.setOptionText("False");
+       option2Q7.setQuizQuestion(question7);
+       questionOptionsRepository.save(option2Q7);
 
         // Question 8 - Which of the following would raise a `KeyError` in Python?
         QuizQuestion question8 = new QuizQuestion();
@@ -1315,11 +1465,21 @@ public class QuizQuestionService {
 
         // Question 9 - True or False: In Python, the `compose()` function is used to combine multiple functions into one.
         QuizQuestion question9 = new QuizQuestion();
-        question9.setQuestion("True or False: In Python, the `compose()` function is used to combine multiple functions into one.");
+        question9.setQuestion("In Python, the `compose()` function is used to combine multiple functions into one.");
         question9.setQuestionType(QuestionType.TRUE_FALSE);
         question9.setCorrectAnswer("True");
         question9.setQuiz(quiz);
         quizQuestionRepository.save(question9);
+
+       QuestionOptions option1Q9 = new QuestionOptions();
+       option1Q9.setOptionText("True");
+       option1Q9.setQuizQuestion(question9);
+       questionOptionsRepository.save(option1Q9);
+
+       QuestionOptions option2Q9 = new QuestionOptions();
+       option2Q9.setOptionText("False");
+       option2Q9.setQuizQuestion(question9);
+       questionOptionsRepository.save(option2Q9);
 
         // Question 10 - Which of the following is an example of delegation in Python?
         QuizQuestion question10 = new QuizQuestion();
