@@ -16,6 +16,8 @@ public interface UserAnswerRepository extends JpaRepository<UserAnswer, Long> {
     Optional<UserAnswer> findByUserEntityAndQuizQuestion(UserEntity userEntity, QuizQuestion quizQuestion);
     List<UserAnswer> findByUserEntityAndIsCorrectFalse(UserEntity user);
     List<UserAnswer> findByUserEntityIdAndQuizId(Long userId, Long quizId);
+    @Query("SELECT DISTINCT ua.quiz.id FROM UserAnswer ua WHERE ua.userEntity.id = :userId")
+    List<Long> findDistinctQuizIdsByUserId(@Param("userId") Long userId);
     @Query("SELECT ua FROM UserAnswer ua WHERE ua.userEntity = :user AND ua.quizQuestion.quiz.id = :quizId AND ua.isCorrect = false")
     List<UserAnswer> findWrongAnswersByUserAndQuiz(@Param("user") UserEntity user, @Param("quizId") Long quizId);
 }

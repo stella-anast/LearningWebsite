@@ -25,15 +25,33 @@ public class ViewController {
     @Autowired
     private UserAnswerService answerService;
 
-    @GetMapping("/statistics/{userId}/{quizId}")
-    public String getStatistics(@PathVariable String username,@PathVariable Long userId, @PathVariable Long quizId) {
-        int correctCount = answerService.getCorrectAnswersCount(userId, quizId);
-        int totalCount = answerService.getTotalAnswersCount(userId, quizId);
-        double percentage = (double) correctCount / totalCount * 100;
+    @GetMapping("/statistics/{userId}")
+    public List<String> getAllStatistics(@PathVariable Long userId) {
+        // Fetch all quizzes the user has completed
+        List<Long> completedQuizIds = answerService.getCompletedQuizzesByUser(userId);
+        List<String> statisticsList = new ArrayList<>();
 
-        return String.format("User ID: %d, Quiz ID: %d, Correct Answers: %d, Total Answers: %d, Percentage: %.2f%%",
-                userId, quizId, correctCount, totalCount, percentage);
+        // Loop through each quiz and calculate statistics
+        for (Long quizId : completedQuizIds) {
+            int correctCount = answerService.getCorrectAnswersCount(userId, quizId);
+            int totalCount = answerService.getTotalAnswersCount(userId, quizId);
+            double percentage = (double) correctCount / totalCount * 100;
+
+            // Format the statistics for each quiz
+            String stats = String.format("User ID: %d, Quiz ID: %d, Correct Answers: %d, Total Answers: %d, Percentage: %.2f%%",
+                    userId, quizId, correctCount, totalCount, percentage);
+            statisticsList.add(stats);
+        }
+
+        return statisticsList;
     }
+  /*  @GetMapping("/statistics")
+    public String showStatistics(@PathVariable String username, Model model) {
+        model.addAttribute("username", username);
+        return "statistics";
+    }*/
+
+
     @GetMapping("/material")
     public String showMaterial(@PathVariable String username, Model model) {
         model.addAttribute("username", username);

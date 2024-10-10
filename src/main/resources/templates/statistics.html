@@ -28,6 +28,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th>Quiz ID</th>
                     <th>Total Questions</th>
                     <th>Correct Answers</th>
                     <th>Incorrect Answers</th>
@@ -35,18 +36,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="quizStatsRow">
-                    <!-- Assuming these values are set by your server-side controller -->
-                    <td th:text="${totalQuestions}">Total Questions</td>
-                    <td th:text="${correctAnswers}">Correct Answers</td>
-                    <td th:text="${incorrectAnswers}">Incorrect Answers</td>
-                    <td th:text="${scorePercentage}">Score (%)</td>
+                <!-- Loop through all quizzes and display their statistics -->
+                <tr th:each="quizStat : ${quizStatistics}">
+                    <td th:text="${quizStat.quizId}">Quiz ID</td>
+                    <td th:text="${quizStat.totalQuestions}">Total Questions</td>
+                    <td th:text="${quizStat.correctAnswers}">Correct Answers</td>
+                    <td th:text="${quizStat.incorrectAnswers}">Incorrect Answers</td>
+                    <td th:text="${quizStat.scorePercentage}">Score (%)</td>
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="card-footer text-center">
-            <a href="/refresh" class="btn btn-primary">Refresh Statistics</a>
         </div>
     </div>
 </div>

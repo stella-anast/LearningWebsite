@@ -1,5 +1,6 @@
 package com.example.educationsite.services;
 
+import com.example.educationsite.dto.QuizStatisticsDTO;
 import com.example.educationsite.dto.QuizSubmissionDTO;
 import com.example.educationsite.models.*;
 import com.example.educationsite.repositories.CompletedQuizRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,6 +63,10 @@ public class UserAnswerService {
     public UserAnswer findByUserAndQuestion(UserEntity user, QuizQuestion question) {
         return userAnswerRepository.findByUserEntityAndQuizQuestion(user, question).orElse(null);
     }
+    public List<Long> getCompletedQuizzesByUser(Long userId) {
+        // Call repository method to get all distinct quizzes completed by the user
+        return userAnswerRepository.findDistinctQuizIdsByUserId(userId);
+    }
 
     public List<Long> getIncorrectQuestionIds(UserEntity user) {
         // Query repository to get all UserAnswer where isCorrect is false for the given user
@@ -68,6 +74,22 @@ public class UserAnswerService {
                 .stream()
                 .map(userAnswer -> userAnswer.getQuizQuestion().getId())  // Extract the ID from each UserAnswer
                 .collect(Collectors.toList());
+    }
+    // Get statistics for all quizzes completed by a user
+    public List<QuizStatisticsDTO> getStatisticsForUser(Long userId) {
+        List<Long> completedQuizIds = userAnswerRepository.findDistinctQuizIdsByUserId(userId);
+        List<QuizStatisticsDTO> quizStatisticsList = new ArrayList<>();
+
+        for (Long quizId : completedQuizIds) {
+            int correctCount = getCorrectAnswersCount(userId, quizId);
+            int totalCount = getTotalAnswersCount(userId, quizId);
+            double percentage = (totalCount > 0) ? (double) correctCount / totalCount * 100 : 0;
+            int incorrectCount = totalCount - correctCount;
+
+            quizStatisticsList.add(new QuizStatisticsDTO(quizId, totalCount, correctCount, incorrectCount, percentage));
+        }
+
+        return quizStatisticsList;
     }
     public int getCorrectAnswersCount(Long userId, Long quizId) {
         List<UserAnswer> userAnswers = userAnswerRepository.findByUserEntityIdAndQuizId(userId, quizId);
