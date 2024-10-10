@@ -5,6 +5,7 @@
     <title>Quizzes</title>
     <link rel="icon" type="image/x-icon" href="/python-logo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         .quiz-container {
             margin: 50px auto;
@@ -27,6 +28,22 @@
 <body style="background-color: #B0C4DE" layout:fragment="content">
 
 <div class="container quiz-container">
+    <!-- Display level-up message if user leveled up -->
+    <div th:if="${levelup}">
+        <div class="alert alert-success">
+            <strong>Congratulations!</strong> You have leveled up to the next skill level!
+        </div>
+        <script>
+            // Trigger confetti when the page loads
+            window.addEventListener('load', function() {
+                confetti({
+                    particleCount: 200,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            });
+        </script>
+    </div>
     <div class="card">
         <div class="card-header text-center">
             <h3><span th:if="${quizId == '0'}" th:text="'Retry quiz'"></span><span th:if="${quizId != '0'}" th:text="'Quiz ' + ${quizId}"></span>: solutions to your wrong answers</h3>

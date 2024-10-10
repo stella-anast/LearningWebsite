@@ -109,6 +109,7 @@ public class ViewController {
         }
         int score = (correctAnswers * 100) / questions.size();
 
+        boolean levelup = false;
         if(lessonQuiz){
             Quiz q = quizService.findById(quizId);
             // define composite id
@@ -123,9 +124,9 @@ public class ViewController {
             answerService.submitQuiz(completedQuiz);
             // Check if unit is complete after this submission
             if(score>=80){
+                levelup=true; // we might level up
                 Long lessonId = q.getLesson().getId();
                 List<Quiz> unitQuizzes = quizService.findBySkillLevel(lessonId);
-                boolean levelup = true;
                 for(Quiz quiz : unitQuizzes){
                     CompletedQuizId qId = new CompletedQuizId();
                     qId.setUserId(uid);
@@ -155,13 +156,13 @@ public class ViewController {
         // Redirect to another controller to show the results
         Map<String, String> response = new HashMap<>();
         response.put("message", "Quiz submitted successfully");
-        response.put("redirectUrl", "/api/" + username + "/quiz/" + quizId + "/results");
+        response.put("redirectUrl", "/api/" + username + "/quiz/" + quizId + "/results?levelup="+levelup);
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/quiz/{quizId}/results")
-    public String getResults(@PathVariable String username, @PathVariable String quizId, Model model) {
+    public String getResults(@PathVariable String username, @PathVariable String quizId, @RequestParam(required = false) Boolean levelup, Model model) {
         UserEntity user = userService.findByUsername(username);
         List<Long> wrongQuestionIds;
         Long qid = Long.valueOf(quizId);
@@ -170,12 +171,14 @@ public class ViewController {
         } else {
             wrongQuestionIds = answerService.getIncorrectQuestionIds(user);
         }
+        System.out.println(levelup);
         List<QuizQuestion> wrongQuestions = quizQuestionService.findQuestionsByIds(wrongQuestionIds);
         // Get the wrongQuestions from the quiz question service
         model.addAttribute("username", username);
         model.addAttribute("questions", wrongQuestions);
         model.addAttribute("user", user);
         model.addAttribute("quizId", quizId);
+        model.addAttribute("levelup", levelup);
         return "results";  // Replace with the actual view name
     }
 
